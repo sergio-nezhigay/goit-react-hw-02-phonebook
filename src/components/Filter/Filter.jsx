@@ -1,5 +1,6 @@
 import React from 'react';
 import { nanoid } from 'nanoid';
+import PropTypes from 'prop-types';
 
 import { Label } from 'components/ContactForm/ContactForm.styled';
 import { InputShort } from './Filter.styled';
@@ -20,3 +21,8 @@ export function Filter({ name, onChange }) {
     </div>
   );
 }
+
+Filter.propTypes = {
+  name: PropTypes.string,
+  onChange: PropTypes.func.isRequired,
+};
