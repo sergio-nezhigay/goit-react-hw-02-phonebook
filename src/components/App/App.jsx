@@ -18,15 +18,14 @@ export class App extends Component {
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
     filter: '',
-    name: '',
-    number: '',
   };
 
-  onSubmit = e => {
-    e.preventDefault();
-    const name = e.target.elements.name.value.trim();
-    const number = e.target.elements.number.value.trim();
-    if (this.state.contacts.some(contact => contact.name.includes(name))) {
+  onSubmit = ({ name, number }, { resetForm }) => {
+    if (
+      this.state.contacts.some(contact =>
+        contact.name.toLowerCase().includes(name.toLowerCase())
+      )
+    ) {
       alert(`${name} is already in contacts.`);
     } else {
       this.setState(prevState => {
@@ -43,7 +42,7 @@ export class App extends Component {
         };
       });
     }
-    e.target.reset();
+    resetForm();
   };
 
   onChange = e => {
@@ -67,12 +66,18 @@ export class App extends Component {
           <ContactForm onSubmit={this.onSubmit} />
         </Section>
         <Section title="Contacts">
-          <Filter filter={filter} onChange={this.onChange} />
-          <ContactList
-            contacts={contacts}
-            filter={filter}
-            onDelete={this.onDelete}
-          />
+          {contacts.length ? (
+            <>
+              <Filter filter={filter} onChange={this.onChange} />
+              <ContactList
+                contacts={contacts}
+                filter={filter}
+                onDelete={this.onDelete}
+              />
+            </>
+          ) : (
+            ''
+          )}
         </Section>
       </Container>
     );

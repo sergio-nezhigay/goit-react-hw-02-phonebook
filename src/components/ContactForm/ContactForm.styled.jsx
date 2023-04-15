@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { Form, Field } from 'formik';
 
 export const Label = styled.label`
   display: block;
@@ -9,14 +10,14 @@ export const Label = styled.label`
   }
 `;
 
-export const Form = styled.form`
+export const StyledForm = styled(Form)`
   width: 100%;
   padding: ${props => props.theme.spacing(4)} ${props => props.theme.spacing(4)};
   border-radius: 15px;
   border: 1px solid #80808033;
 `;
 
-export const Input = styled.input`
+export const StyledField = styled(Field)`
   display: block;
   width: 100%;
   background: #ecf0f3;
