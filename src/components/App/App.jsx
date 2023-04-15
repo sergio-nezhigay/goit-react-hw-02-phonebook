@@ -27,21 +27,21 @@ export class App extends Component {
       )
     ) {
       alert(`${name} is already in contacts.`);
-    } else {
-      this.setState(prevState => {
-        return {
-          contacts: [
-            ...prevState.contacts,
-            {
-              id: nanoid(),
-              name: name,
-              number: number,
-            },
-          ],
-          filter: '',
-        };
-      });
+      return;
     }
+    this.setState(prevState => {
+      return {
+        contacts: [
+          ...prevState.contacts,
+          {
+            id: nanoid(),
+            name: name,
+            number: number,
+          },
+        ],
+        filter: '',
+      };
+    });
     resetForm();
   };
 
@@ -57,9 +57,14 @@ export class App extends Component {
       };
     });
   };
+  filterContacts = (contacts, filter) =>
+    contacts.filter(contact =>
+      contact.name.toLowerCase().includes(filter.toLowerCase())
+    );
 
   render() {
     const { filter, contacts } = this.state;
+    const filteredContacts = this.filterContacts(contacts, filter);
     return (
       <Container>
         <Section title="Phonebook">
@@ -70,8 +75,7 @@ export class App extends Component {
             <>
               <Filter filter={filter} onChange={this.onChange} />
               <ContactList
-                contacts={contacts}
-                filter={filter}
+                contacts={filteredContacts}
                 onDelete={this.onDelete}
               />
             </>
