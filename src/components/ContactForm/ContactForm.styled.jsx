@@ -1,6 +1,14 @@
 import styled from '@emotion/styled';
 import { Form, Field } from 'formik';
 
+export const ErrorStyledMessage = styled.p`
+  color: red;
+  padding: 10px;
+  &::before {
+    content: '⚠ ';
+  }
+`;
+
 export const Label = styled.label`
   display: block;
   margin-bottom: 10px;
