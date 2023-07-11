@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { nanoid } from 'nanoid';
-import PropTypes from 'prop-types';
+
 import { Formik, ErrorMessage } from 'formik';
 import { object, string } from 'yup';
+import { IFormValues, IFormHelpers } from '../../interfaces/Interfaces';
 
 import {
   StyledForm,
@@ -33,11 +34,11 @@ let schema = object({
     .required(),
 });
 
-export class ContactForm extends Component {
-  // nameInputID and numberInputID should be here
-  // for them to give different IDs for multiple instances
-  // using stateless components gives same ID
+interface IContactFormProps {
+  onSubmit: (values: IFormValues, helpers: IFormHelpers) => void;
+}
 
+export class ContactForm extends Component<IContactFormProps> {
   nameInputID = nanoid();
   numberInputID = nanoid();
 
@@ -72,7 +73,3 @@ export class ContactForm extends Component {
     );
   }
 }
-
-ContactForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-};

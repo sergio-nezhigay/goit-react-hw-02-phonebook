@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { Form, Field } from 'formik';
+import { theme } from '../../styles';
 
 export const ErrorStyledMessage = styled.p`
   color: red;
@@ -19,15 +20,16 @@ export const Label = styled.label`
 `;
 
 export const StyledForm = styled(Form)`
-  width: 100%;
-  padding: ${props => props.theme.spacing(4)} ${props => props.theme.spacing(4)};
+  display: flex;
+  flex-direction: column;
+  padding: 20px 20px;
   border-radius: 15px;
   border: 1px solid #80808033;
 `;
 
 export const StyledField = styled(Field)`
   display: block;
-  width: 100%;
+  /* width: 100%; */
   background: #ecf0f3;
 
   padding-left: 20px;
@@ -48,9 +50,9 @@ export const StyledField = styled(Field)`
 export const Button = styled.button`
   display: block;
   width: 100%;
-  color: ${props => props.theme.colors.white};
+  color: ${theme.colors.white};
   margin-top: 20px;
-  background: ${props => props.theme.colors.accent};
+  background: ${theme.colors.accent};
   height: 40px;
   border-radius: 20px;
   cursor: pointer;

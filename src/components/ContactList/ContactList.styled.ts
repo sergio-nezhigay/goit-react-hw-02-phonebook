@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { theme } from '../../styles';
 
 export const List = styled.ul`
   display: flex;
@@ -22,7 +23,7 @@ export const Li = styled.li`
     transform: translateY(-50%);
     width: 6px;
     height: 6px;
-    background: ${props => props.theme.colors.dark};
+    background: ${props => theme.colors.dark};
     border-radius: 50%;
   }
 `;
@@ -30,8 +31,8 @@ export const Li = styled.li`
 export const DeleteButton = styled.button`
   display: inline-block;
   font-size: 12px;
-  color: ${props => props.theme.colors.white};
-  background: ${props => props.theme.colors.accent};
+  color: ${theme.colors.white};
+  background: ${theme.colors.accent};
   padding: 3px 10px;
   border-radius: 10px;
   box-shadow: 6px 6px 6px #cbced1, -6px -6px 6px white;

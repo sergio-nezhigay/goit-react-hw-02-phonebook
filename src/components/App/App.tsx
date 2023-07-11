@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
 import { nanoid } from 'nanoid';
-
+import { Container, Section, ContactForm, ContactList, Filter } from '../index';
 import {
-  Container,
-  Section,
-  ContactForm,
-  ContactList,
-  Filter,
-} from 'components';
+  IFormValues,
+  IFormHelpers,
+  IAppState,
+} from '../../interfaces/Interfaces';
 
-export class App extends Component {
-  state = {
+export class App extends Component<{}, IAppState> {
+  state: IAppState = {
     contacts: [
       { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
       { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
@@ -20,7 +18,7 @@ export class App extends Component {
     filter: '',
   };
 
-  onSubmit = ({ name, number }, { resetForm }) => {
+  onSubmit = ({ name, number }: IFormValues, { resetForm }: IFormHelpers) => {
     if (
       this.state.contacts.some(contact =>
         contact.name.toLowerCase().includes(name.toLowerCase())
@@ -45,26 +43,29 @@ export class App extends Component {
     resetForm();
   };
 
-  onChange = e => {
+  onChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = e.target;
-    this.setState({ [name]: value });
+    this.setState((prevState: IAppState) => ({
+      ...prevState,
+      [name]: value,
+    }));
   };
 
-  onDelete = id => {
+  onDelete = (id: string) => {
     this.setState(prevState => {
       return {
         contacts: prevState.contacts.filter(contact => contact.id !== id),
       };
     });
   };
-  filterContacts = (contacts, filter) =>
+  filterContacts = ({ contacts, filter }: IAppState) =>
     contacts.filter(contact =>
       contact.name.toLowerCase().includes(filter.toLowerCase())
     );
 
   render() {
     const { filter, contacts } = this.state;
-    const filteredContacts = this.filterContacts(contacts, filter);
+    const filteredContacts = this.filterContacts({ contacts, filter });
     return (
       <Container>
         <Section title="Phonebook">

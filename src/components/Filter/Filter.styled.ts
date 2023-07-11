@@ -1,10 +1,10 @@
 import styled from '@emotion/styled';
+import { theme } from '../../styles';
 
 export const InputShort = styled.input`
   display: block;
   width: 50%;
   background: #ecf0f3;
-  padding: 10px;
   padding-left: 20px;
   height: 40px;
   font-size: 13px;
@@ -16,6 +16,6 @@ export const InputShort = styled.input`
     color: gray;
   }
   &:focus {
-    border: 2px solid ${props => props.theme.colors.accent};
+    border: 2px solid ${theme.colors.accent};
   }
 `;
